@@ -169,7 +169,7 @@ public class Surround extends ModuleHelper {
                     BlockBreakingInfo value = (BlockBreakingInfo) var22.next();
                     BlockPos valuePos = value.getPos();
                     BlockPos packetPos = packet.getPos();
-                    if (valuePos.getX() == packetPos.getX() || valuePos.getY() == packetPos.getY() || valuePos.getZ() == packetPos.getZ()) {Th
+                    if (valuePos.getX() == packetPos.getX() || valuePos.getY() == packetPos.getY() || valuePos.getZ() == packetPos.getZ()) {
                         int msPassed = (int) (this.mc.getTickDelta() * 1000.0F);
                         if (msPassed != 0) {
                             int ping = PingUtils.enabled.get() ? PingUtils.getPing() : PlayerUtils.getPing();
