@@ -1,0 +1,35 @@
+{
+	"schemaVersion": 1,
+	"id": "venomhack",
+	"version": "${version}",
+	"name": "Venomhack",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/venomhack/icon.png",
+	"environment": "*",
+	"accessWidener": "venomhack.accesswidener",
+	"entrypoints": {
+		"meteor": [
+			"venomhack.Venomhack420"
+		]
+	},
+	"mixins": [
+		"venomhack-meteor.mixins.json",
+		"venomhack420.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.11",
+		"minecraft": "~1.19.2",
+		"java": ">=17"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

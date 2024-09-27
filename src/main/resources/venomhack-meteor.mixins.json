@@ -1,0 +1,37 @@
+{
+  "required": true,
+  "package": "venomhack.mixins.meteor",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "AirPlaceAccessor",
+    "AnchorAuraMixin",
+    "AutoAnvilMixin",
+    "AutoRespawnMixin",
+    "BedAuraMixin",
+    "BoolSettingBuilderMixin",
+    "BreakIndicatorMixin",
+    "CrystalAuraMixin",
+    "DoubleSettingBuilderMixin",
+    "ElytraFlightModeMixin",
+    "ElytraFlyMixin",
+    "MeshAccessor",
+    "MeshMixin",
+    "MiddleClickExtraMixin",
+    "ModuleMixin",
+    "ModuleScreenMixin",
+    "NoFallMixin",
+    "NoInteractMixin",
+    "PacketModeMixin",
+    "Renderer3DMixin",
+    "ReverseStepMixin",
+    "SprintMixin",
+    "StepMixin",
+    "TracersMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixins": [
+    "InvUtilsMixin"
+  ]
+}

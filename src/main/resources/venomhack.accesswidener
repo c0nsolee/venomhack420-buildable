@@ -1,0 +1,3 @@
+accessWidener	v1	named
+
+accessible field net/minecraft/network/packet/s2c/play/EntityTrackerUpdateS2CPacket trackedValues Ljava/util/List;
