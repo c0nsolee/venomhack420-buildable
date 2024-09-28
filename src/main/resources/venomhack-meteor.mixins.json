@@ -18,7 +18,6 @@
     "MeshMixin",
     "MiddleClickExtraMixin",
     "ModuleMixin",
-    "ModuleScreenMixin",
     "NoFallMixin",
     "NoInteractMixin",
     "PacketModeMixin",
