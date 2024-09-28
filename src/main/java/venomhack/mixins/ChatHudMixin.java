@@ -50,7 +50,7 @@ public class ChatHudMixin {
     }
 
     @Inject(method = {"render"}, at = {@At("TAIL")})
-    private void renderTail(MatrixStack matrices, int currentTick, CallbackInfo ci) {
+    private void renderTail(MatrixStack matrices, int currentTick, int mouseX, int mouseY, CallbackInfo ci) {
         if (Modules.get().get(ChatControl.class).isActive() && Modules.get().get(BetterChat.class).displayPlayerHeads() && MeteorClient.mc.options.getChatVisibility().getValue() != ChatVisibility.HIDDEN) {
             int maxLineCount = MeteorClient.mc.inGameHud.getChatHud().getVisibleLineCount();
             double d = MeteorClient.mc.options.getChatOpacity().getValue() * 0.9F + 0.1F;

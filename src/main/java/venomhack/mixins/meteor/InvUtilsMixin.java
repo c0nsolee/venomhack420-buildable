@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(value = {InvUtils.class}, remap = false)
 public class InvUtilsMixin {
-    @Redirect(method = {"findFastestTool"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;method_7924(Lnet/minecraft/block/BlockState;)F"), remap = true)
+    @Redirect(method = {"findFastestTool"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getMiningSpeedMultiplier(Lnet/minecraft/block/BlockState;)F"), remap = true)
     private static float findFastest(ItemStack itemStack, BlockState state) {
         return !itemStack.isSuitableFor(state) ? -1.0F : itemStack.getMiningSpeedMultiplier(state);
     }

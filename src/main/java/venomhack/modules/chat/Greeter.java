@@ -48,7 +48,7 @@ public class Greeter extends ModuleHelper {
         } else {
             PlayerListEntry player = event.getPlayer();
             GameProfile profile = player.getProfile();
-            if (this.onlyFriends.get() && !Friends.get().isFriend(new OtherClientPlayerEntity(this.mc.world, profile, player.getPublicKeyData()))) {
+            if (this.onlyFriends.get() && !Friends.get().isFriend(new OtherClientPlayerEntity(this.mc.world, profile))) {
                 return;
             }
 
@@ -80,7 +80,7 @@ public class Greeter extends ModuleHelper {
         } else {
             PlayerListEntry player = event.getPlayer();
             GameProfile profile = player.getProfile();
-            if (this.onlyFriends.get() && !Friends.get().isFriend(new OtherClientPlayerEntity(this.mc.world, profile, player.getPublicKeyData()))) {
+            if (this.onlyFriends.get() && !Friends.get().isFriend(new OtherClientPlayerEntity(this.mc.world, profile))) {
                 return;
             }
 

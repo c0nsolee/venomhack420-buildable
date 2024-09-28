@@ -7,7 +7,7 @@ import meteordevelopment.meteorclient.renderer.ShapeMode;
 import meteordevelopment.meteorclient.renderer.text.TextRenderer;
 import meteordevelopment.meteorclient.settings.Setting;
 import meteordevelopment.meteorclient.systems.friends.Friends;
-import meteordevelopment.meteorclient.utils.misc.Vec3;
+import org.joml.Vector3d;
 import meteordevelopment.meteorclient.utils.render.NametagUtils;
 import meteordevelopment.meteorclient.utils.render.color.Color;
 import meteordevelopment.meteorclient.utils.render.color.SettingColor;
@@ -72,7 +72,7 @@ public class BurrowEsp extends ModuleHelper {
     private void onRender2D(Render2DEvent event) {
         if (this.renderText.get()) {
             for (BlockPos blockPos : this.blockList) {
-                Vec3 vec3 = new Vec3();
+                Vector3d vec3 = new Vector3d();
                 vec3.set((double) blockPos.getX() + 0.5, (double) blockPos.getY() + this.yOffset.get(), (double) blockPos.getZ() + 0.5);
                 if (NametagUtils.to2D(vec3, this.textScale.get())) {
                     NametagUtils.begin(vec3);

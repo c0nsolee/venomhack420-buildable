@@ -9,7 +9,7 @@ import meteordevelopment.meteorclient.renderer.ShapeMode;
 import meteordevelopment.meteorclient.renderer.text.TextRenderer;
 import meteordevelopment.meteorclient.settings.Setting;
 import meteordevelopment.meteorclient.settings.SettingGroup;
-import meteordevelopment.meteorclient.utils.misc.Vec3;
+import org.joml.Vector3d;
 import meteordevelopment.meteorclient.utils.player.PlayerUtils;
 import meteordevelopment.meteorclient.utils.render.NametagUtils;
 import meteordevelopment.meteorclient.utils.render.WireframeEntityRenderer;
@@ -110,7 +110,7 @@ public class LogoutSpotsRewrite extends ModuleHelper {
     @EventHandler
     private void onRender2D(Render2DEvent event) {
         this.spots.forEach(spot -> {
-            Vec3 vec = new Vec3();
+            Vector3d vec = new Vector3d();
             double x = MathHelper.lerp(event.tickDelta, spot.player.lastRenderX, spot.player.getX());
             double y = MathHelper.lerp(event.tickDelta, spot.player.lastRenderY, spot.player.getY());
             double z = MathHelper.lerp(event.tickDelta, spot.player.lastRenderZ, spot.player.getZ());

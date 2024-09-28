@@ -14,11 +14,12 @@ import meteordevelopment.meteorclient.utils.player.PlayerUtils;
 import meteordevelopment.meteorclient.utils.world.Dimension;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.client.gui.screen.DownloadingTerrainScreen;
-import net.minecraft.network.Packet;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket.PositionAndOnGround;
 import net.minecraft.network.packet.c2s.play.TeleportConfirmC2SPacket;
 import net.minecraft.network.packet.s2c.play.PlayerPositionLookS2CPacket;
+import net.minecraft.network.packet.s2c.play.PositionFlag;
 import net.minecraft.util.math.Vec3d;
 import venomhack.Venomhack420;
 import venomhack.modules.ModuleHelper;
@@ -352,8 +353,8 @@ public class PacketFly extends ModuleHelper {
 
                 ((PlayerPositionLookS2CPacketAccessor) packet).setYaw(this.mc.player.getYaw());
                 ((PlayerPositionLookS2CPacketAccessor) packet).setPitch(this.mc.player.getPitch());
-                packet.getFlags().remove(PlayerPositionLookS2CPacket.Flag.X_ROT);
-                packet.getFlags().remove(PlayerPositionLookS2CPacket.Flag.Y_ROT);
+                packet.getFlags().remove(PositionFlag.X_ROT);
+                packet.getFlags().remove(PositionFlag.Y_ROT);
                 this.teleportId = packet.getTeleportId();
             } else {
                 this.teleportId = 0;

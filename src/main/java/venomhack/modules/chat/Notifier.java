@@ -29,7 +29,7 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.Packet;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockBreakingProgressS2CPacket;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.MutableText;
@@ -62,7 +62,7 @@ public class Notifier extends ModuleHelper {
     private final Setting<Boolean> effectNotifier = this.setting("effect-notifier", "Notifies you about certain effects.", Boolean.valueOf(false), this.sgGeneral);
     private final Setting<Boolean> playSound = this.setting("play-sound", "Plays a sound when a player enters your render distance.", Boolean.valueOf(false), this.sgVisualRange, this.visualRange::get);
     private final Setting<JoinLeaveEvent> event = this.setting("event", "When to log the entities.", JoinLeaveEvent.BOTH, this.sgVisualRange, this.visualRange::get);
-    private final Setting<Object2BooleanMap<EntityType<?>>> entities = this.setting("entities", "Which entities to nofity about.", this.sgVisualRange, true, this.visualRange::get, null, null, EntityType.PLAYER);
+    private final Setting<Set<EntityType<?>>> entities = this.setting("entities", "Which entities to nofity about.", this.sgVisualRange, true, this.visualRange::get, null, null, EntityType.PLAYER);
     private final Setting<Boolean> visualRangeIgnoreFriends = this.setting("ignore-friends", "Ignores friends.", Boolean.valueOf(true), this.sgVisualRange, this.visualRange::get);
     private final Setting<Boolean> burrowFriends = this.setting("friends", "Whether to notify when a friend gets an effect.", Boolean.valueOf(false), this.sgBurrow, this.burrowNotify::get);
     private final Setting<Boolean> renderBurrow = this.setting("render-burrow", "Renders an overlay when someone burrows.", Boolean.valueOf(true), this.sgBurrow, this.burrowNotify::get);
@@ -96,7 +96,7 @@ public class Notifier extends ModuleHelper {
     @EventHandler
     private void onEntityAdded(EntityAddedEvent event) {
         Entity entity = event.entity;
-        if (this.visualRange.get() && this.event.get().join() && this.entities.get().keySet().contains(event.entity.getType()) && !entity.equals(this.mc.player)) {
+        if (this.visualRange.get() && this.event.get().join() && this.entities.get().contains(event.entity.getType()) && !entity.equals(this.mc.player)) {
             if (event.entity instanceof PlayerEntity) {
                 if ((!this.visualRangeIgnoreFriends.get() || !Friends.get().isFriend((PlayerEntity) event.entity)) && !(event.entity instanceof FakePlayerEntity)) {
                     ChatUtils.sendMsg(event.entity.getId() + 100, this.title(), Formatting.LIGHT_PURPLE, Text.literal(event.entity.getEntityName()).append(Text.translatable("notifier.spawn").formatted(Formatting.RED)));
@@ -117,7 +117,7 @@ public class Notifier extends ModuleHelper {
     @EventHandler
     private void onEntityRemoved(EntityRemovedEvent event) {
         Entity entity = event.entity;
-        if (this.visualRange.get() && this.event.get().leave() && !entity.equals(this.mc.player) && this.entities.get().keySet().contains(event.entity.getType())) {
+        if (this.visualRange.get() && this.event.get().leave() && !entity.equals(this.mc.player) && this.entities.get().contains(event.entity.getType())) {
             if (event.entity instanceof PlayerEntity) {
                 if ((!this.visualRangeIgnoreFriends.get() || !Friends.get().isFriend((PlayerEntity) event.entity)) && !(event.entity instanceof FakePlayerEntity)) {
                     ChatUtils.sendMsg(event.entity.getId() + 100, this.title(), Formatting.LIGHT_PURPLE, Text.literal(event.entity.getEntityName()).append(Text.translatable("notifier.despawn").formatted(Formatting.DARK_GREEN)));

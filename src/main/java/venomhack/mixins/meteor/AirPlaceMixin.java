@@ -41,7 +41,7 @@ public class AirPlaceMixin {
         }
     }
 
-    @Redirect(method = {"onTick"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;method_7909()Lnet/minecraft/item/Item;", remap = true))
+    @Redirect(method = {"onTick"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getItem()Lnet/minecraft/item/Item;", remap = true))
     private Item offhandSupport(ItemStack stack) {
         Item var3 = MeteorClient.mc.player.getMainHandStack().getItem();
         if (var3 instanceof BlockItem item) {
@@ -98,7 +98,7 @@ public class AirPlaceMixin {
         }
     }
 
-    @Redirect(method = {"onRender"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;method_7909()Lnet/minecraft/item/Item;", remap = true))
+    @Redirect(method = {"onRender"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getItem()Lnet/minecraft/item/Item;", remap = true))
     private Item offhandRender(ItemStack stack) {
         Item var4 = MeteorClient.mc.player.getMainHandStack().getItem();
         if (var4 instanceof BlockItem) {

@@ -2,7 +2,7 @@ package venomhack;
 
 import meteordevelopment.meteorclient.MeteorClient;
 import meteordevelopment.meteorclient.addons.MeteorAddon;
-import meteordevelopment.meteorclient.systems.commands.Commands;
+import meteordevelopment.meteorclient.commands.Commands;
 import meteordevelopment.meteorclient.systems.config.Config;
 import meteordevelopment.meteorclient.systems.hud.Hud;
 import meteordevelopment.meteorclient.systems.hud.HudGroup;
@@ -104,8 +104,8 @@ public class Venomhack420 extends MeteorAddon {
       modules.add(new VillagerTrader());
       modules.add(new WaypointDeleter());
       modules.add(new ItemDropper());
-      Commands.get().add(new LogoutSpotsCommand());
-      Commands.get().add(new HeadItemCommand());
+      Commands.add(new LogoutSpotsCommand());
+      Commands.add(new HeadItemCommand());
       Hud hud = Hud.get();
       hud.register(ItemHud.INFO);
       hud.register(StatsHud.INFO);

@@ -433,10 +433,10 @@ public class UtilsPlus extends Utils {
         boolean bl2 = movement.y != vec3d.y;
         boolean bl3 = movement.z != vec3d.z;
         boolean bl4 = entity.isOnGround() || bl2 && movement.y < 0.0;
-        if (entity.stepHeight > 0.0F && bl4 && (bl || bl3)) {
-            Vec3d vec3d2 = adjustMovementForCollisions(entity, new Vec3d(movement.x, entity.stepHeight, movement.z), box, MeteorClient.mc.world, list);
-            Vec3d vec3d3 = adjustMovementForCollisions(entity, new Vec3d(0.0, entity.stepHeight, 0.0), box.stretch(movement.x, 0.0, movement.z), MeteorClient.mc.world, list);
-            if (vec3d3.y < (double) entity.stepHeight) {
+        if (entity.getStepHeight() > 0.0F && bl4 && (bl || bl3)) {
+            Vec3d vec3d2 = adjustMovementForCollisions(entity, new Vec3d(movement.x, entity.getStepHeight(), movement.z), box, MeteorClient.mc.world, list);
+            Vec3d vec3d3 = adjustMovementForCollisions(entity, new Vec3d(0.0, entity.getStepHeight(), 0.0), box.stretch(movement.x, 0.0, movement.z), MeteorClient.mc.world, list);
+            if (vec3d3.y < (double) entity.getStepHeight()) {
                 Vec3d vec3d4 = adjustMovementForCollisions(entity, new Vec3d(movement.x, 0.0, movement.z), box.offset(vec3d3), MeteorClient.mc.world, list).add(vec3d3);
                 if (vec3d4.horizontalLengthSquared() > vec3d2.horizontalLengthSquared()) {
                     vec3d2 = vec3d4;
