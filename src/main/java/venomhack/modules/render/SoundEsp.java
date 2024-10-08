@@ -6,7 +6,7 @@ import meteordevelopment.meteorclient.events.world.TickEvent.Post;
 import meteordevelopment.meteorclient.renderer.Renderer2D;
 import meteordevelopment.meteorclient.renderer.text.TextRenderer;
 import meteordevelopment.meteorclient.settings.Setting;
-import meteordevelopment.meteorclient.utils.misc.Vec3;
+import org.joml.Vector3d;
 import meteordevelopment.meteorclient.utils.render.NametagUtils;
 import meteordevelopment.meteorclient.utils.render.color.Color;
 import meteordevelopment.meteorclient.utils.render.color.SettingColor;
@@ -63,7 +63,7 @@ public class SoundEsp extends ModuleHelper {
             SoundInstance sound = pair.getLeft();
             WeightedSoundSet soundSet = pair.getRight();
             if (soundSet.getSubtitle() != null) {
-                Vec3 soundPos = new Vec3(sound.getX(), sound.getY(), sound.getZ());
+                Vector3d soundPos = new Vector3d(sound.getX(), sound.getY(), sound.getZ());
                 if (NametagUtils.to2D(soundPos, this.scale.get())) {
                     TextRenderer renderer = TextRenderer.get();
                     NametagUtils.begin(soundPos);

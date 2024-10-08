@@ -12,14 +12,13 @@ import meteordevelopment.meteorclient.settings.SettingGroup;
 import meteordevelopment.meteorclient.systems.modules.Modules;
 import meteordevelopment.meteorclient.systems.modules.movement.NoFall;
 import meteordevelopment.meteorclient.systems.modules.player.AntiHunger;
-import meteordevelopment.meteorclient.utils.misc.Vec3;
 import meteordevelopment.meteorclient.utils.render.NametagUtils;
 import meteordevelopment.meteorclient.utils.render.color.Color;
 import meteordevelopment.orbit.EventHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.item.*;
-import net.minecraft.network.Packet;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket;
 import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket.Mode;
 import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket;
@@ -31,6 +30,7 @@ import net.minecraft.network.packet.s2c.play.GameStateChangeS2CPacket;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import org.joml.Vector3d;
 import venomhack.Venomhack420;
 import venomhack.modules.ModuleHelper;
 
@@ -152,7 +152,7 @@ public class OneShot extends ModuleHelper {
                         double xx = MathHelper.lerp(event.tickDelta, entity.lastRenderX, entity.getX());
                         double yy = MathHelper.lerp(event.tickDelta, entity.lastRenderY, entity.getY());
                         double zz = MathHelper.lerp(event.tickDelta, entity.lastRenderZ, entity.getZ());
-                        Vec3 pos = new Vec3().set(xx, yy, zz);
+                        Vector3d pos = new Vector3d().set(xx, yy, zz);
                         pos.add(0.0, (double) entity.getEyeHeight(entity.getPose()) + 0.75, 0.0);
                         double damage = MathHelper.ceil(MathHelper.clamp(v.length() * ((ArrowEntity) entity).getDamage(), 0.0, 2.147483647E9));
                         if (NametagUtils.to2D(pos, this.scale.get())) {

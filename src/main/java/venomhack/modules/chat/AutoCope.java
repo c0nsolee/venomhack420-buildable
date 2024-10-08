@@ -7,7 +7,7 @@ import meteordevelopment.meteorclient.gui.widgets.containers.WVerticalList;
 import meteordevelopment.meteorclient.gui.widgets.pressable.WButton;
 import meteordevelopment.meteorclient.settings.Setting;
 import meteordevelopment.orbit.EventHandler;
-import net.minecraft.network.Packet;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.DeathMessageS2CPacket;
 import venomhack.Venomhack420;
 import venomhack.gui.screens.GuideScreen;

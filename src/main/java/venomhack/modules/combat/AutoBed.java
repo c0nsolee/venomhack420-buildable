@@ -14,7 +14,7 @@ import meteordevelopment.meteorclient.systems.modules.movement.Blink;
 import meteordevelopment.meteorclient.utils.Utils;
 import meteordevelopment.meteorclient.utils.entity.EntityUtils;
 import meteordevelopment.meteorclient.utils.entity.SortPriority;
-import meteordevelopment.meteorclient.utils.misc.Vec3;
+import org.joml.Vector3d;
 import meteordevelopment.meteorclient.utils.player.FindItemResult;
 import meteordevelopment.meteorclient.utils.player.InvUtils;
 import meteordevelopment.meteorclient.utils.player.PlayerUtils;
@@ -1035,7 +1035,7 @@ public class AutoBed extends ModuleHelper implements IModule {
 
             try {
                 for (BedRenderBlock block : this.renderBeds) {
-                    Vec3 pos = new Vec3((double) block.pos.getX() + (double) block.placeDirection.getOffsetX() * 0.5 + 0.5, (double) block.pos.getY() + 0.3, (double) block.pos.getZ() + (double) block.placeDirection.getOffsetZ() * 0.5 + 0.5);
+                    Vector3d pos = new Vector3d((double) block.pos.getX() + (double) block.placeDirection.getOffsetX() * 0.5 + 0.5, (double) block.pos.getY() + 0.3, (double) block.pos.getZ() + (double) block.placeDirection.getOffsetZ() * 0.5 + 0.5);
                     if (NametagUtils.to2D(pos, this.damageScale.get())) {
                         NametagUtils.begin(pos);
                         TextRenderer.get().begin(1.0, false, true);

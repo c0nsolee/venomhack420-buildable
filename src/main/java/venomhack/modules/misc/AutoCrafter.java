@@ -21,6 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.network.packet.c2s.play.CloseHandledScreenC2SPacket;
 import net.minecraft.recipe.Recipe;
+import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.SlotActionType;
 import venomhack.Venomhack420;
@@ -62,9 +63,9 @@ public class AutoCrafter extends ModuleHelper {
 
                 for (RecipeResultCollection recipeResultCollection : this.mc.player.getRecipeBook().getOrderedResults()) {
                     for (Recipe<?> recipe : recipeResultCollection.getRecipes(true)) {
-                        Item item = recipe.getOutput().getItem();
+                        Item item = recipe.getOutput(DynamicRegistryManager.EMPTY).getItem();
                         if (this.items.get().contains(item)) {
-                            boolean isBed = recipe.getOutput().getItem() instanceof BedItem;
+                            boolean isBed = recipe.getOutput(DynamicRegistryManager.EMPTY).getItem() instanceof BedItem;
                             FindItemResult beds = null;
                             if (isBed) {
                                 beds = InvUtils.find(itemStack -> itemStack.getItem() instanceof BedItem);

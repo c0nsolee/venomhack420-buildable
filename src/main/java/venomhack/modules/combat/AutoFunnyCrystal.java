@@ -12,7 +12,7 @@ import meteordevelopment.meteorclient.settings.SettingGroup;
 import meteordevelopment.meteorclient.systems.friends.Friends;
 import meteordevelopment.meteorclient.systems.modules.Modules;
 import meteordevelopment.meteorclient.utils.entity.EntityUtils;
-import meteordevelopment.meteorclient.utils.misc.Vec3;
+import org.joml.Vector3d;
 import meteordevelopment.meteorclient.utils.player.FindItemResult;
 import meteordevelopment.meteorclient.utils.player.InvUtils;
 import meteordevelopment.meteorclient.utils.player.PlayerUtils;
@@ -401,7 +401,7 @@ public class AutoFunnyCrystal extends ModuleHelper implements IModule {
     @EventHandler
     private void onRender2D(Render2DEvent event) {
         if (this.mineTarget != null && this.renderProgress.get() && this.target != null && !this.mc.player.getAbilities().creativeMode) {
-            Vec3 pos = new Vec3((double) this.mineTarget.getX() + 0.5, (double) this.mineTarget.getY() + this.yOffset.get() + this.height.get() * 0.5, (double) this.mineTarget.getZ() + 0.5);
+            Vector3d pos = new Vector3d((double) this.mineTarget.getX() + 0.5, (double) this.mineTarget.getY() + this.yOffset.get() + this.height.get() * 0.5, (double) this.mineTarget.getZ() + 0.5);
             if (NametagUtils.to2D(pos, this.progressScale.get())) {
                 NametagUtils.begin(pos);
                 TextRenderer.get().begin(1.0, false, true);

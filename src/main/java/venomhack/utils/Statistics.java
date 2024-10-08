@@ -24,7 +24,7 @@ import net.minecraft.client.network.OtherClientPlayerEntity;
 import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.Packet;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket;
 import net.minecraft.network.packet.c2s.play.PlayerInteractEntityC2SPacket;
 import net.minecraft.network.packet.s2c.play.BlockUpdateS2CPacket;
@@ -210,7 +210,7 @@ public class Statistics {
 
                     for (PlayerListEntry target : MeteorClient.mc.getNetworkHandler().getPlayerList()) {
                         if (target.getProfile().getName().equals(victimsName)) {
-                            victim = new OtherClientPlayerEntity(MeteorClient.mc.world, new GameProfile(target.getProfile().getId(), victimsName), target.getPublicKeyData());
+                            victim = new OtherClientPlayerEntity(MeteorClient.mc.world, new GameProfile(target.getProfile().getId(), victimsName));
                             break;
                         }
                     }

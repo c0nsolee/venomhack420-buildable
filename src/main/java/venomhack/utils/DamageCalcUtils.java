@@ -13,7 +13,6 @@ import net.minecraft.entity.DamageUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -30,6 +29,8 @@ import net.minecraft.world.explosion.Explosion;
 import net.minecraft.world.explosion.Explosion.DestructionType;
 import venomhack.mixinInterface.IVec3d;
 import venomhack.modules.misc.PacketMine;
+
+import static meteordevelopment.meteorclient.MeteorClient.mc;
 
 public class DamageCalcUtils {
     private static final Vec3d vec = new Vec3d(0.0, 0.0, 0.0);
@@ -79,7 +80,7 @@ public class DamageCalcUtils {
                 damage = Math.max((float) (25 - (resistance.getAmplifier() + 1) * 5) * damage * 0.04F, 0.0F);
             }
 
-            int i = EnchantmentHelper.getProtectionAmount(target.getArmorItems(), DamageSource.explosion(explosion));
+            int i = EnchantmentHelper.getProtectionAmount(target.getArmorItems(), mc.world.getDamageSources().explosion(explosion));
             if (i > 0) {
                 damage = DamageUtil.getInflictedDamage(damage, (float) i);
             }

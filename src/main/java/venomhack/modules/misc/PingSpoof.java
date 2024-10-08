@@ -6,7 +6,7 @@ import meteordevelopment.meteorclient.events.packets.PacketEvent.Receive;
 import meteordevelopment.meteorclient.events.packets.PacketEvent.Send;
 import meteordevelopment.meteorclient.settings.Setting;
 import meteordevelopment.orbit.EventHandler;
-import net.minecraft.network.Packet;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.c2s.play.KeepAliveC2SPacket;
 import venomhack.Venomhack420;
 import venomhack.modules.ModuleHelper;

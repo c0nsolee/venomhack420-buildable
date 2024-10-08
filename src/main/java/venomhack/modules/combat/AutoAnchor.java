@@ -12,7 +12,8 @@ import meteordevelopment.meteorclient.systems.modules.Modules;
 import meteordevelopment.meteorclient.systems.modules.movement.Blink;
 import meteordevelopment.meteorclient.utils.entity.EntityUtils;
 import meteordevelopment.meteorclient.utils.entity.SortPriority;
-import meteordevelopment.meteorclient.utils.misc.Vec3;
+import org.joml.Vector3d;
+import org.joml.Vector3d;
 import meteordevelopment.meteorclient.utils.player.*;
 import meteordevelopment.meteorclient.utils.render.NametagUtils;
 import meteordevelopment.meteorclient.utils.render.color.SettingColor;
@@ -33,6 +34,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.Mutable;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
+import org.joml.Vector3d;
 import venomhack.Venomhack420;
 import venomhack.enums.RenderShape;
 import venomhack.enums.Type;
@@ -43,10 +45,7 @@ import venomhack.modules.ModuleHelper;
 import venomhack.utils.*;
 import venomhack.utils.customObjects.RenderBlock;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class AutoAnchor extends ModuleHelper implements IModule {
     public final Setting<Boolean> holeDelays = this.setting("hole-delays", "Uses separate delays when the target is in a hole.", Boolean.valueOf(false));
@@ -459,7 +458,7 @@ public class AutoAnchor extends ModuleHelper implements IModule {
             int preA = this.damageColor.get().a;
             synchronized (this.renderBlocks) {
                 this.renderBlocks.forEach(damage -> {
-                    Vec3 pos = new Vec3((double) damage.pos.getX() + 0.5, (double) damage.pos.getY() + this.yOffset.get() + this.height.get() * 0.5, (double) damage.pos.getZ() + 0.5);
+                    Vector3d pos = new Vector3d((double) damage.pos.getX() + 0.5, (double) damage.pos.getY() + this.yOffset.get() + this.height.get() * 0.5, (double) damage.pos.getZ() + 0.5);
                     if (NametagUtils.to2D(pos, this.damageScale.get())) {
                         NametagUtils.begin(pos);
                         TextRenderer.get().begin(1.0, false, true);

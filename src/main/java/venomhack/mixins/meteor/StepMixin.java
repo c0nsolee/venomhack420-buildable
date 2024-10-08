@@ -63,7 +63,7 @@ public abstract class StepMixin {
     @Unique
     private void doNcpStep() {
         assert mc.player != null;
-        mc.player.stepHeight = 0.6F;
+        mc.player.setStepHeight(0.6F);
         switch (this.activeWhen.get()) {
             case Sneaking -> {
                 if (!mc.player.isSneaking()) {
@@ -78,7 +78,7 @@ public abstract class StepMixin {
         }
 
         if (!this.safeStep.get() || !(PlayerUtils.getTotalHealth() <= (double) this.stepHealth.get()) && !(PlayerUtils.getTotalHealth() - PlayerUtils.possibleHealthReductions() <= (double) this.stepHealth.get().intValue())) {
-            mc.player.stepHeight = (this.height.get().floatValue());
+            mc.player.setStepHeight(this.height.get().floatValue());
             if (mc.player.horizontalCollision && mc.player.isOnGround() && !mc.player.isHoldingOntoLadder() && !mc.options.jumpKey.isPressed() && mc.player.fallDistance == 0.0F && (mc.player.forwardSpeed != 0.0F || mc.player.sidewaysSpeed != 0.0F)) {
                 for (double i = 1.0; i <= this.height.get(); i += 0.5) {
                     Box box = mc.player.getBoundingBox().offset(0.0, i, 0.0);

@@ -13,7 +13,7 @@ import meteordevelopment.meteorclient.systems.friends.Friends;
 import meteordevelopment.meteorclient.utils.entity.EntityUtils;
 import meteordevelopment.meteorclient.utils.entity.SortPriority;
 import meteordevelopment.meteorclient.utils.entity.fakeplayer.FakePlayerEntity;
-import meteordevelopment.meteorclient.utils.misc.Vec3;
+import org.joml.Vector3d;
 import meteordevelopment.meteorclient.utils.player.FindItemResult;
 import meteordevelopment.meteorclient.utils.player.InvUtils;
 import meteordevelopment.meteorclient.utils.player.PlayerUtils;
@@ -263,7 +263,7 @@ public class AutoCity extends ModuleHelper {
     @EventHandler
     private void onRender2D(Render2DEvent event) {
         if (this.blockPosTarget != null && this.renderProgress.get() && this.target != null && !this.mc.player.getAbilities().creativeMode) {
-            Vec3 pos = new Vec3((double) this.blockPosTarget.getX() + 0.5, (double) this.blockPosTarget.getY() + 0.5, (double) this.blockPosTarget.getZ() + 0.5);
+            Vector3d pos = new Vector3d((double) this.blockPosTarget.getX() + 0.5, (double) this.blockPosTarget.getY() + 0.5, (double) this.blockPosTarget.getZ() + 0.5);
             if (NametagUtils.to2D(pos, this.progressScale.get())) {
                 NametagUtils.begin(pos);
                 TextRenderer.get().begin(1.0, false, true);

@@ -35,7 +35,7 @@ public class VillagerTrader extends ModuleHelper {
     private final Setting<Boolean> ignoreWalls = this.setting("ignore-walls", "Whether or not to trade through walls.", Boolean.valueOf(true));
     private final Setting<Boolean> tradeAura = this.setting("aura", "Automatically opens the guis of nearby villagers to trade.", Boolean.valueOf(true));
     private final Setting<List<Item>> trades = this.setting("selected-trades", "The items you wish to auto trade for.", this.sgGeneral, false, Item -> true, null, null, null, Items.ENCHANTED_BOOK);
-    private final Setting<Object2BooleanMap<EntityType<?>>> entities = this.setting("entities", "Entities to trade with.", this.sgGeneral, true, null, null, null, EntityType.VILLAGER, EntityType.WANDERING_TRADER);
+    private final Setting<Set<EntityType<?>>> entities = this.setting("entities", "Entities to trade with.", this.sgGeneral, true, null, null, null, EntityType.VILLAGER, EntityType.WANDERING_TRADER);
     private final Setting<Integer> tradeDelay = this.setting("trade-delay", "How many ticks to wait between opening guis.", Integer.valueOf(5), this.sgDelay, 0.0, 50.0);
     private final Setting<Integer> retradeDelay = this.setting("cool-down", "How long in seconds it takes to trade again.", Integer.valueOf(60), this.sgDelay, 0.0, 300.0);
     private final List<Entity> entityList = new ArrayList();
@@ -79,7 +79,7 @@ public class VillagerTrader extends ModuleHelper {
                     if ((!(entityx instanceof LivingEntity) || !((LivingEntity) entityx).isDead()) && entityx.isAlive()) {
                         if (entityx.getPos().distanceTo(pos) > range) {
                             return false;
-                        } else if (!this.entities.get().keySet().contains(entityx.getType())) {
+                        } else if (!this.entities.get().contains(entityx.getType())) {
                             return false;
                         } else if (this.alreadyTraded(entityx)) {
                             return false;

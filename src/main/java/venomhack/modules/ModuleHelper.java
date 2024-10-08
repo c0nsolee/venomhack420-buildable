@@ -23,6 +23,7 @@ import net.minecraft.util.math.BlockPos;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -540,7 +541,7 @@ public class ModuleHelper extends Module {
         return group.add(new ColorSetting(name, description, new SettingColor(red, green, blue, alpha, rainbow), onChanged, onModuleActivated, visible));
     }
 
-    public Setting<Object2BooleanMap<EntityType<?>>> setting(String name, String description, SettingGroup group, boolean onlyAttackable, IVisible visible, Consumer<Object2BooleanMap<EntityType<?>>> onChanged, Consumer<Setting<Object2BooleanMap<EntityType<?>>>> onModuleActivated, EntityType<?>... defaultValue) {
+    public Setting<Set<EntityType<?>>> setting(String name, String description, SettingGroup group, boolean onlyAttackable, IVisible visible, Consumer<Set<EntityType<?>>> onChanged, Consumer<Setting<Set<EntityType<?>>>> onModuleActivated, EntityType<?>... defaultValue) {
         return group.add(new EntityTypeListSetting.Builder().name(name).description(description).defaultValue(defaultValue).onChanged(onChanged).onModuleActivated(onModuleActivated).visible(visible).build());
     }
 

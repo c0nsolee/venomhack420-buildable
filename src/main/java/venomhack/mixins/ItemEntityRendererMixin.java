@@ -6,7 +6,7 @@ import net.minecraft.client.render.entity.ItemEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.BlockItem;
-import net.minecraft.util.math.Quaternion;
+import org.joml.Quaternionf;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -20,10 +20,10 @@ public abstract class ItemEntityRendererMixin {
         DroppedItemsView dropped = Modules.get().get(DroppedItemsView.class);
         if (dropped.isActive() && !itemEntity.getStack().isEmpty()) {
             if (itemEntity.getStack().getItem() instanceof BlockItem) {
-                matrixStack.multiply(new Quaternion(dropped.rotationXBlocksDropped.get().floatValue(), dropped.rotationYBlocksDropped.get().floatValue(), dropped.rotationZBlocksDropped.get().floatValue(), dropped.rotationWBlocksDropped.get().floatValue()));
+                matrixStack.multiply(new Quaternionf(dropped.rotationXBlocksDropped.get().floatValue(), dropped.rotationYBlocksDropped.get().floatValue(), dropped.rotationZBlocksDropped.get().floatValue(), dropped.rotationWBlocksDropped.get().floatValue()));
                 matrixStack.scale(dropped.scaleXYZBlocksDropped.get().floatValue(), dropped.scaleXYZBlocksDropped.get().floatValue(), dropped.scaleXYZBlocksDropped.get().floatValue());
             } else {
-                matrixStack.multiply(new Quaternion(dropped.rotationXDropped.get().floatValue(), dropped.rotationYDropped.get().floatValue(), dropped.rotationZDropped.get().floatValue(), dropped.rotationWDropped.get().floatValue()));
+                matrixStack.multiply(new Quaternionf(dropped.rotationXDropped.get().floatValue(), dropped.rotationYDropped.get().floatValue(), dropped.rotationZDropped.get().floatValue(), dropped.rotationWDropped.get().floatValue()));
                 matrixStack.scale(dropped.scaleXDropped.get().floatValue(), dropped.scaleYDropped.get().floatValue(), dropped.scaleZDropped.get().floatValue());
             }
         }

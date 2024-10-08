@@ -21,7 +21,7 @@ import meteordevelopment.meteorclient.utils.entity.EntityUtils;
 import meteordevelopment.meteorclient.utils.entity.SortPriority;
 import meteordevelopment.meteorclient.utils.entity.Target;
 import meteordevelopment.meteorclient.utils.misc.Keybind;
-import meteordevelopment.meteorclient.utils.misc.Vec3;
+import org.joml.Vector3d;
 import meteordevelopment.meteorclient.utils.player.InvUtils;
 import meteordevelopment.meteorclient.utils.player.PlayerUtils;
 import meteordevelopment.meteorclient.utils.player.Rotations;
@@ -42,7 +42,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.*;
-import net.minecraft.network.Packet;
+import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.c2s.play.*;
 import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket.Action;
 import net.minecraft.network.packet.s2c.play.EntitiesDestroyS2CPacket;
@@ -138,7 +138,7 @@ public class AutoCrystal extends ModuleHelper implements IModule {
     private final Setting<Boolean> pauseFacePlaceCev = this.setting("fp-pause-on-funny-crystal", "Will stop face placing while auto funny crystal is active.", Boolean.valueOf(true), this.sgPause, () -> this.pauseMode.get() != Type.NONE && this.facePlacePause.get() && this.facePlace.get());
     private final Setting<Boolean> facePlacePauseEat = this.setting("fp-pause-on-eat", "Pauses face placing while eating.", Boolean.valueOf(false), this.sgPause, () -> this.pauseMode.get() != Type.NONE && this.facePlacePause.get() && this.facePlace.get());
     private final Setting<Boolean> facePlacePauseMine = this.setting("fp-pause-on-mine", "Pauses face placing while mining.", Boolean.valueOf(false), this.sgPause, () -> this.pauseMode.get() != Type.NONE && this.facePlacePause.get() && this.facePlace.get());
-    private final Setting<Object2BooleanMap<EntityType<?>>> entities = this.setting("entities", "The entities to attack.", this.sgTargeting, true, null, null, null,EntityType.PLAYER);
+    private final Setting<Set<EntityType<?>>> entities = this.setting("entities", "The entities to attack.", this.sgTargeting, true, null, null, null,EntityType.PLAYER);
     private final Setting<Boolean> ignoreNakeds = this.setting("ignore-nakeds", "Will not target naked players.", Boolean.valueOf(false), this.sgTargeting);
     private final Setting<Integer> targetRange = this.setting("target-range", "The maximum range the entity can be to be targeted.", Integer.valueOf(10), this.sgTargeting, 0.0, 18.0);
     private final Setting<Boolean> predict = this.setting("predict-movement", "Predicts the targets movement.", Boolean.valueOf(false), this.sgTargeting);
@@ -266,7 +266,7 @@ public class AutoCrystal extends ModuleHelper implements IModule {
                 this.playerPos = ((IBlink) Modules.get().get(Blink.class)).getOldPos();
             }
 
-            PlayerUtils2.collectTargets(this.targets, this.friends, this.targetRange.get(), Integer.MAX_VALUE, this.ignoreNakeds.get(), false, this.ignoreTerrain.get(), this.sortPriority.get(), this.entities.get().keySet());
+            PlayerUtils2.collectTargets(this.targets, this.friends, this.targetRange.get(), Integer.MAX_VALUE, this.ignoreNakeds.get(), false, this.ignoreTerrain.get(), this.sortPriority.get(), this.entities.get());
             if (this.targets.isEmpty()) {
                 this.rotationTarget = null;
             } else if (!this.pauseBedAura.get() || !Modules.get().get(AutoBed.class).active()) {
@@ -367,7 +367,7 @@ public class AutoCrystal extends ModuleHelper implements IModule {
                 }
 
                 this.crystalAliveMap.put(packet.getId(), System.currentTimeMillis());
-                if (packet.getEntityTypeId() != EntityType.END_CRYSTAL) {
+                if (packet.getEntityType() != EntityType.END_CRYSTAL) {
                     return;
                 }
 
@@ -1575,7 +1575,7 @@ public class AutoCrystal extends ModuleHelper implements IModule {
                     double xPos = (float) (this.renderBlocks.get(1).pos.getX() - damage0.pos.getX()) * this.slideProgress + (float) damage0.pos.getX();
                     double yPos = (float) (this.renderBlocks.get(1).pos.getY() - damage0.pos.getY()) * this.slideProgress + (float) damage0.pos.getY();
                     double zPos = (float) (this.renderBlocks.get(1).pos.getZ() - damage0.pos.getZ()) * this.slideProgress + (float) damage0.pos.getZ();
-                    Vec3 pos = new Vec3(xPos + 0.5, yPos + this.yOffset.get() + (this.renderSelfDamage.get() ? 0.6667 : 0.5), zPos + 0.5);
+                    Vector3d pos = new Vector3d(xPos + 0.5, yPos + this.yOffset.get() + (this.renderSelfDamage.get() ? 0.6667 : 0.5), zPos + 0.5);
                     float factor = this.shrink.get() && !(damage0.ticks > (float) (this.damageRenderTime.get() - this.beforeFadeDelay.get())) ? damage0.ticks / (float) this.damageRenderTime.get().intValue() : 1.0F;
                     if (NametagUtils.to2D(pos, this.damageScale.get() * (double) factor)) {
                         TextRenderer renderer = TextRenderer.get();
@@ -1604,7 +1604,7 @@ public class AutoCrystal extends ModuleHelper implements IModule {
                     for (RenderBlock damage : this.renderBlocks) {
                         if (!(damage.ticks < (float) (this.renderTime.get() - this.damageRenderTime.get()))) {
                             float factor = this.shrink.get() && !(damage.ticks > (float) (this.damageRenderTime.get() - this.beforeFadeDelay.get())) ? damage.ticks / (float) this.damageRenderTime.get().intValue() : 1.0F;
-                            Vec3 pos = new Vec3((double) damage.pos.getX() + 0.5, (double) damage.pos.getY() + this.yOffset.get() + (this.renderSelfDamage.get() ? 0.6667 : 0.5), (double) damage.pos.getZ() + 0.5);
+                            Vector3d pos = new Vector3d((double) damage.pos.getX() + 0.5, (double) damage.pos.getY() + this.yOffset.get() + (this.renderSelfDamage.get() ? 0.6667 : 0.5), (double) damage.pos.getZ() + 0.5);
                             if (NametagUtils.to2D(pos, this.damageScale.get() * (double) factor)) {
                                 TextRenderer renderer = TextRenderer.get();
                                 NametagUtils.begin(pos);
